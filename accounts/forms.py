@@ -1,11 +1,10 @@
 from django import forms
-from django.contrib.auth import get_user_model
-
+from django.contrib.auth import get_user_model, authenticate
 
 User = get_user_model()
 
 
-class UserLoginForm(forms.ModelForm):
+class UserLoginForm(forms.Form):
     username = forms.CharField(label='Логин')
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
 
@@ -18,18 +17,27 @@ class UserLoginForm(forms.ModelForm):
 
         return username
 
+    def clean_password(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if not user:
+            raise forms.ValidationError('Неверный пароль')
+
+        return password
+
 
 class UserSignupForm(forms.ModelForm):
     username = forms.CharField(label='Логин')
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Подтвердите пароль', widget=forms.PasswordInput)
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
 
     class Meta:
         model = User
         fields = [
             'username',
-            'password1',
-            'password2',
+            'password',
         ]
 
     def clean_username(self):
