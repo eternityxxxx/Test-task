@@ -1,0 +1,9 @@
+{
+  "name": "auth",
+  "description": "Django user authentication system",
+  "image": "heroku/python",
+  "keywords": [
+    "python",
+    "django",
+  ],
+}

@@ -1,9 +1,10 @@
 from pathlib import Path
+import os
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'rupgcx-%#h0#d*=g*uex4pmrv=c#udls+fs5e8u(s9n6m8f($f'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
