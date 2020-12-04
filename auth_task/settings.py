@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['shielded-cove-87663.herokuapp.com', ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
